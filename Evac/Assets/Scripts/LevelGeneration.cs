@@ -24,17 +24,17 @@ public class LevelGeneration : MonoBehaviour
     {
         if (direction == 1 || direction == 2)
         { //Move RIGHT
-            Vector3 newPos = new Vector3(transform.position.x + moveAmount, transform.position.y, 0);
+            Vector3 newPos = new Vector3(transform.position.x + moveAmount, 0, transform.position.z);
             transform.position = newPos;
         }
         else if (direction == 3 || direction == 4)
         { //Move LEFT
-            Vector3 newPos = new Vector3(transform.position.x - moveAmount, transform.position.y, 0);
+            Vector3 newPos = new Vector3(transform.position.x - moveAmount, 0, transform.position.z);
             transform.position = newPos;
         }
         else if (direction == 5)
         { //Move DOWN
-            Vector3 newPos = new Vector3(transform.position.x, transform.position.y - moveAmount, 0);
+            Vector3 newPos = new Vector3(transform.position.x, 0, transform.position.z - moveAmount);
             transform.position = newPos;
         }
 
