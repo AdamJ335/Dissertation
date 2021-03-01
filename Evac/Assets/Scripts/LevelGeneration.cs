@@ -10,6 +10,11 @@ public class LevelGeneration : MonoBehaviour
     public float moveAmount;
     private float timeBtwRoom;
     private float startTimeBtwRoom = 0.25f;
+
+    public float minX;
+    public float maxX;
+    public float minZ;
+    private bool stopGeneration;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,18 +29,44 @@ public class LevelGeneration : MonoBehaviour
     {
         if (direction == 1 || direction == 2)
         { //Move RIGHT
-            Vector3 newPos = new Vector3(transform.position.x + moveAmount, 0, transform.position.z);
-            transform.position = newPos;
+            if (transform.position.x < maxX)
+            {
+                Vector3 newPos = new Vector3(transform.position.x + moveAmount, 0, transform.position.z);
+                transform.position = newPos;
+            }
+            else
+            {
+                direction = 5; //forces room to move down if theres no more space
+            }
+
         }
         else if (direction == 3 || direction == 4)
         { //Move LEFT
-            Vector3 newPos = new Vector3(transform.position.x - moveAmount, 0, transform.position.z);
-            transform.position = newPos;
+
+            if (transform.position.x > minX)
+            {
+                Vector3 newPos = new Vector3(transform.position.x - moveAmount, 0, transform.position.z);
+                transform.position = newPos;
+            }
+            else
+            {
+                direction = 5; // forces room layout down
+            }
+
         }
         else if (direction == 5)
         { //Move DOWN
-            Vector3 newPos = new Vector3(transform.position.x, 0, transform.position.z - moveAmount);
-            transform.position = newPos;
+            if (transform.position.z > minZ)
+            {
+                Vector3 newPos = new Vector3(transform.position.x, 0, transform.position.z - moveAmount);
+                transform.position = newPos;
+            }
+            else
+            {
+                //STOP LEVEL GENERATION
+                stopGeneration = true;
+            }
+
         }
 
         Instantiate(rooms[0], transform.position, Quaternion.identity);
@@ -45,7 +76,7 @@ public class LevelGeneration : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (timeBtwRoom <= 0)
+        if (timeBtwRoom <= 0 && stopGeneration == false)
         {
             Move();
             timeBtwRoom = startTimeBtwRoom;
