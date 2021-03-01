@@ -794,14 +794,17 @@ MonoBehaviour:
   startingPositions:
   - {fileID: 651667131}
   rooms:
-  - {fileID: 2580800823965431082, guid: 53ccec9e4d5f3f84fb52f0cc956973db, type: 3}
   - {fileID: 1827202699123959364, guid: e1963ce0176073944acd55ed4d674791, type: 3}
   - {fileID: 7914233438468535400, guid: 3f77d118b95ba3f4caf9b622477a4e3d, type: 3}
   - {fileID: 3900372368568476251, guid: 26e18eb87e380c646b0eef468f1c5327, type: 3}
+  - {fileID: 2580800823965431082, guid: 53ccec9e4d5f3f84fb52f0cc956973db, type: 3}
   moveAmount: 18
   minX: -27.8
   maxX: 25
   minZ: -37.05
+  room:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!4 &1805257157
 Transform:
   m_ObjectHideFlags: 0
