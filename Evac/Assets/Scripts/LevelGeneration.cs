@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +15,8 @@ public class LevelGeneration : MonoBehaviour
     public float maxX;
     public float minZ;
     private bool stopGeneration;
+
+    private int downCounter;
 
     public LayerMask room;
     // Start is called before the first frame update
@@ -33,6 +35,7 @@ public class LevelGeneration : MonoBehaviour
         { //Move RIGHT
             if (transform.position.x < maxX)
             {
+                downCounter = 0;
                 Vector3 newPos = new Vector3(transform.position.x + moveAmount, 0, transform.position.z);
                 transform.position = newPos;
 
@@ -61,6 +64,7 @@ public class LevelGeneration : MonoBehaviour
 
             if (transform.position.x > minX)
             {
+                downCounter = 0;
                 Vector3 newPos = new Vector3(transform.position.x - moveAmount, 0, transform.position.z);
                 transform.position = newPos;
 
@@ -78,19 +82,26 @@ public class LevelGeneration : MonoBehaviour
         }
         else if (direction == 5)
         { //Move DOWN
+            downCounter++;
             if (transform.position.z > minZ)
             {
                 Collider2D roomDetection = Physics2D.OverlapCircle(transform.position, 1, room);
                 if (roomDetection.GetComponent<RoomType>().type != 1 && roomDetection.GetComponent<RoomType>().type != 3)
                 {
-                    roomDetection.GetComponent<RoomType>().RoomDestruction();
-
-                    int randBottomRoom = Random.Range(1, 4);
-                    if (randBottomRoom == 2)
-                    {
-                        randBottomRoom = 1;
+                    if(downCounter >=2){
+                        roomDetection.GetComponent<RoomType>().RoomDestruction();
+                        Instantiate(rooms[3], transform.position, Quaternion.identity);
                     }
-                    Instantiate(rooms[randBottomRoom], transform.position, Quaternion.identity);
+                    else{
+                        roomDetection.GetComponent<RoomType>().RoomDestruction();
+
+                        int randBottomRoom = Random.Range(1, 4);
+                        if (randBottomRoom == 2)
+                        {
+                            randBottomRoom = 1;
+                        }
+                        Instantiate(rooms[randBottomRoom], transform.position, Quaternion.identity);
+                    }
                 }
 
                 Vector3 newPos = new Vector3(transform.position.x, 0, transform.position.z - moveAmount);
