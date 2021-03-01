@@ -1378,9 +1378,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingPositions:
   - {fileID: 651667131}
-  - {fileID: 1221302763}
-  - {fileID: 986829876}
-  - {fileID: 90050971}
   rooms:
   - {fileID: 1827202699123959364, guid: e1963ce0176073944acd55ed4d674791, type: 3}
   - {fileID: 7914233438468535400, guid: 3f77d118b95ba3f4caf9b622477a4e3d, type: 3}
