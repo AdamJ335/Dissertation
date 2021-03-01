@@ -14,7 +14,7 @@ public class LevelGeneration : MonoBehaviour
     public float minX;
     public float maxX;
     public float minZ;
-    private bool stopGeneration;
+    public bool stopGeneration;
 
     private int downCounter;
 
@@ -88,11 +88,13 @@ public class LevelGeneration : MonoBehaviour
                 Collider2D roomDetection = Physics2D.OverlapCircle(transform.position, 1, room);
                 if (roomDetection.GetComponent<RoomType>().type != 1 && roomDetection.GetComponent<RoomType>().type != 3)
                 {
-                    if(downCounter >=2){
+                    if (downCounter >= 2)
+                    {
                         roomDetection.GetComponent<RoomType>().RoomDestruction();
                         Instantiate(rooms[3], transform.position, Quaternion.identity);
                     }
-                    else{
+                    else
+                    {
                         roomDetection.GetComponent<RoomType>().RoomDestruction();
 
                         int randBottomRoom = Random.Range(1, 4);
