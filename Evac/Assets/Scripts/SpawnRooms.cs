@@ -6,7 +6,6 @@ public class SpawnRooms : MonoBehaviour
 {
     public LayerMask whatIsRoom;
     public LevelGeneration levelGen;
-    // Start is called before the first frame update
 
     // Update is called once per frame
     void Update()
