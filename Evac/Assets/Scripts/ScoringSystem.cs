@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ScoringSystem : MonoBehaviour
 {
     public GameObject scoreText;
-    public static int score = 5;
+    public static int score = SpawnKeys.maxKeys;
 
     void Update()
     {
