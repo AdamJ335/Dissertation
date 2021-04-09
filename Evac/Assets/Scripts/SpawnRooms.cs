@@ -8,13 +8,14 @@ public class SpawnRooms : MonoBehaviour
     public LevelGeneration levelGen;
 
     // Update is called once per frame
-    void Update()
+    void ForceUpdate()
     {
         Collider2D roomDetection = Physics2D.OverlapCircle(transform.position, 1, whatIsRoom);
         if (roomDetection == null && levelGen.stopGeneration == true)
         {
             //Spawn Random Room
             int rand = Random.Range(0, levelGen.rooms.Length);
+            Debug.Log(rand);
             Instantiate(levelGen.rooms[rand], transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
