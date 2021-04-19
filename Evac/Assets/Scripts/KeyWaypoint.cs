@@ -14,10 +14,10 @@ public class KeyWaypoint : MonoBehaviour
     {
         for (int i = 0; i < targets.Length; i++)
         {
-            if (CollectKey.isKeyCollected)
-            {
-
-            }
+            //if (CollectKey.getIsKeyCollected())
+            //{
+            //    Destroy(targets[i]);
+            //}
             setTarget(targets[i]);
         }
 

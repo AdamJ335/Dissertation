@@ -583,6 +583,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: key_gold
       objectReference: {fileID: 0}
+    - target: {fileID: 170560, guid: cc5de5e674870ca479a40105f80555ad, type: 3}
+      propertyPath: m_TagString
+      value: Collectable
+      objectReference: {fileID: 0}
     - target: {fileID: 462124, guid: cc5de5e674870ca479a40105f80555ad, type: 3}
       propertyPath: m_RootOrder
       value: 24
@@ -732,7 +736,7 @@ GameObject:
   - component: {fileID: 572607274}
   m_Layer: 5
   m_Name: Text
-  m_TagString: Untagged
+  m_TagString: Collectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1779,7 +1783,7 @@ GameObject:
   - component: {fileID: 1394977307}
   m_Layer: 5
   m_Name: Waypoint
-  m_TagString: Untagged
+  m_TagString: Collectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2012,7 +2016,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   center: {x: 0, y: 0, z: -15}
-  size: {x: 70, y: 0, z: 70}
+  size: {x: 20, y: 0, z: 20}
   keyPrefab: {fileID: 435163365}
 --- !u!4 &1536495683
 Transform:
@@ -2047,9 +2051,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   img: {fileID: 1394977307}
-  target: {fileID: 435163366}
+  targets:
+  - {fileID: 435163366}
   meter: {fileID: 572607274}
-  offset: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: 1.5, z: 0}
 --- !u!1 &1614169471
 GameObject:
   m_ObjectHideFlags: 0
