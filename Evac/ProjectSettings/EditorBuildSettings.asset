@@ -11,4 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/MapRooms/MapMain.unity
+    guid: 02f086a390fd38f4bbccfa79a90f8b01
+  - enabled: 1
+    path: Assets/Scenes/MapRooms/MapStart.unity
+    guid: 42a14fefaeb67db4da23249c1a27e33f
+  - enabled: 1
+    path: Assets/Scenes/MapRooms/MapEmpty.unity
+    guid: fc8347fd74415fe4ab36c8e336af67a2
   m_configObjects: {}

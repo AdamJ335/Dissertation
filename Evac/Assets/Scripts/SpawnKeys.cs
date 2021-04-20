@@ -7,6 +7,8 @@ public class SpawnKeys : MonoBehaviour
     public Vector3 center;
     public Vector3 size;
     public GameObject keyPrefab;
+
+    //public GameObject waypointPrefab;
     public static int maxKeys = 5;
     // Start is called before the first frame update
     void Start()
@@ -31,8 +33,9 @@ public class SpawnKeys : MonoBehaviour
     public void spawnKey()
     {
         Vector3 pos = center + new Vector3(Random.Range(-size.x / 2, size.x / 2), 0, Random.Range(-size.z / 2, size.z / 2));
-
+        //Vector3 wayPointPos = center + new Vector3(Random.Range(-size.x / 2, size.x / 2), 2, Random.Range(-size.z / 2, size.z / 2));
         Instantiate(keyPrefab, pos, Quaternion.identity);
+        //Instantiate(waypointPrefab, wayPointPos, Quaternion.identity);
     }
 
     void OnDrawGizmosSelected()

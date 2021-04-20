@@ -8,7 +8,7 @@ public class CollectKey : MonoBehaviour
     //public bool isKeyCollected = false;
     private bool isKeyCollected { get; set; } = false;
 
-    //getter setter
+
     public bool getIsKeyCollected()
     {
         return this.isKeyCollected;
@@ -24,11 +24,7 @@ public class CollectKey : MonoBehaviour
         collectSound.Play();
         ScoringSystem.score -= 1;
         isKeyCollected = true;
-        Destroy(gameObject);
-        if (other.CompareTag("Collectable"))
-        {
-            Destroy(gameObject);
-        }
+        Destroy(this.gameObject);
 
 
     }

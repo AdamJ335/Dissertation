@@ -8,6 +8,10 @@ public class SpawnObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (objects.Length == 0)
+        {
+            return;
+        }
         int rand = Random.Range(0, objects.Length);
         GameObject instance = (GameObject)Instantiate(objects[rand], transform.position, Quaternion.identity);
         instance.transform.parent = transform;
