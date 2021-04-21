@@ -10,4 +10,5 @@ public class Door : MonoBehaviour
     }
 
     public DoorType doorType;
+
 }
