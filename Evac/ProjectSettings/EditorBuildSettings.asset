@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MapRooms/MapEmpty.unity
     guid: fc8347fd74415fe4ab36c8e336af67a2
+  - enabled: 1
+    path: Assets/Scenes/MapRooms/MapEnd.unity
+    guid: c6389f4f5c4b21449951253decd6b611
   m_configObjects: {}

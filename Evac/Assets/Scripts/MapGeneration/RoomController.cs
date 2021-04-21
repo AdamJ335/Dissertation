@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class RoomInfo
 {
@@ -23,6 +24,9 @@ public class RoomController : MonoBehaviour
     public List<Room> loadedRooms = new List<Room>();
 
     bool isLoadingRoom = false;
+
+    bool spawnedEndRoom = false;
+    bool updatedRooms = false;
 
     void Awake()
     {
@@ -51,11 +55,38 @@ public class RoomController : MonoBehaviour
         }
         if (loadRoomQueue.Count == 0)
         {
+            if (!spawnedEndRoom)
+            {
+                StartCoroutine(SpawnEndRoom());
+            }
+            else if (spawnedEndRoom && !updatedRooms)
+            {
+                foreach (Room room in loadedRooms)
+                {
+                    room.removeUselessDoors();
+                }
+                updatedRooms = true;
+            }
             return;
         }
         currentLoadRoomData = loadRoomQueue.Dequeue();
         isLoadingRoom = true;
         StartCoroutine(LoadRoomRoutine(currentLoadRoomData));
+    }
+
+    IEnumerator SpawnEndRoom()
+    {
+        spawnedEndRoom = true; //stops looping and constantly spawning end rooms
+        yield return new WaitForSeconds(0.5f);
+        if (loadRoomQueue.Count == 0)
+        {
+            Room endRoom = loadedRooms[loadedRooms.Count - 1];
+            Room tempRoom = new Room(endRoom.X, endRoom.Z);
+            Destroy(endRoom.gameObject);
+            var roomToRemove = loadedRooms.Single(r => r.X == tempRoom.X && r.Z == tempRoom.Z);
+            loadedRooms.Remove(roomToRemove);
+            LoadRoom("End", tempRoom.X, tempRoom.Z);
+        }
     }
     public void LoadRoom(string name, int x, int z)
     {
@@ -85,25 +116,35 @@ public class RoomController : MonoBehaviour
 
     public void RegisterRoom(Room room)
     {
-        room.transform.position = new Vector3(
-            currentLoadRoomData.X * room.Width,
-            0,
-            currentLoadRoomData.Z * room.Length
-        );
-
-        room.X = currentLoadRoomData.X;
-        room.Z = currentLoadRoomData.Z;
-        //shows the position of the rooms for debugging
-        room.name = currentWorldName + "-" + currentLoadRoomData.name + " " + room.X + ", " + room.Z;
-        room.transform.parent = transform;
-
-        isLoadingRoom = false;
-
-        if (loadedRooms.Count == 0)
+        if (!doesRoomExist(currentLoadRoomData.X, currentLoadRoomData.Z))
         {
-            CameraController.instance.currRoom = room;
+            room.transform.position = new Vector3(
+                currentLoadRoomData.X * room.Width,
+                0,
+                currentLoadRoomData.Z * room.Length
+            );
+
+            room.X = currentLoadRoomData.X;
+            room.Z = currentLoadRoomData.Z;
+            //shows the position of the rooms for debugging
+            room.name = currentWorldName + "-" + currentLoadRoomData.name + " " + room.X + ", " + room.Z;
+            room.transform.parent = transform;
+
+            isLoadingRoom = false;
+
+            if (loadedRooms.Count == 0)
+            {
+                CameraController.instance.currRoom = room;
+            }
+            loadedRooms.Add(room);
+            //room.removeUselessDoors();
         }
-        loadedRooms.Add(room);
+        else
+        {
+            Destroy(room.gameObject);
+            isLoadingRoom = false;
+
+        }
 
     }
     public bool doesRoomExist(int x, int z)
@@ -111,6 +152,10 @@ public class RoomController : MonoBehaviour
         return loadedRooms.Find(item => item.X == x && item.Z == z) != null;
     }
 
+    public Room FindRoom(int x, int z)
+    {
+        return loadedRooms.Find(item => item.X == x && item.Z == z);
+    }
     public void OnPlayerEnterRoom(Room room)
     {
         CameraController.instance.currRoom = room;
