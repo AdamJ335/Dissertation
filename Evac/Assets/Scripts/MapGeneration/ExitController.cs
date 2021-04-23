@@ -6,18 +6,25 @@ using UnityEngine.SceneManagement;
 
 public class ExitController : MonoBehaviour
 {
+    //generates Timer instance to record time then save it.
+    Timer instance = new Timer();
+
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
+            instance.StopTime();
+            string time = instance.getTime();
+            Save(time);
+            Destroy(other);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-            Save();
+
         }
     }
 
-    private void Save()
+    private void Save(string time)
     {
-        //Save
-        File.WriteAllText("C:/Users/Adam Jennings/Desktop/Projects/Dissertation/Evac/save.txt", "test");
+        //Save to a txt file
+        File.WriteAllText(Application.persistentDataPath + "/save.txt", "Time Taken: " + time);
     }
 }
