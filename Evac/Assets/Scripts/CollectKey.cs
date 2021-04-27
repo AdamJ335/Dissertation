@@ -9,15 +9,6 @@ public class CollectKey : MonoBehaviour
     private bool isKeyCollected { get; set; } = false;
 
 
-    public bool getIsKeyCollected()
-    {
-        return this.isKeyCollected;
-    }
-
-    public void setIsKeyCollected(bool isKeyCollected)
-    {
-        this.isKeyCollected = isKeyCollected;
-    }
 
     void OnTriggerEnter(Collider other)
     {
